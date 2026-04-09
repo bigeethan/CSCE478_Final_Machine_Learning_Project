@@ -16,3 +16,8 @@ merged_dataset = pd.merge(
 )
 
 merged_dataset.to_csv('cab_rides_and_weather.csv', index=False)
+
+cab_rides_and_weather = pd.read_csv('cab_rides_and_weather.csv')
+sample_cab_rides_and_weather = cab_rides_and_weather.sample(n=250000, random_state=42)
+data = sample_cab_rides_and_weather[['distance', 'temp', 'rain', 'wind', 'surge_multiplier', 'name', 'source', 'destination', 'price']].dropna()
+data.to_csv('sample_cab_rides_and_weather.csv', index=False)
