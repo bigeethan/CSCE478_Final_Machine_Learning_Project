@@ -32,7 +32,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 DTR = DecisionTreeRegressor(max_depth=10, random_state=43)
 DTR.fit(X_train, y_train)
 score = DTR.score(X_test, y_test)
-print(f"Test Score: {score:0.4f}")
+print(f"Decision Tree with Regression Test Score: {score:0.4f}")
 
 LR = LinearRegression()
 LR.fit(X_train, y_train)
