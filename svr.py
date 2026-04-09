@@ -1,7 +1,5 @@
 import pandas as pd
-import numpy as np
 from sklearn.svm import SVR
-from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 
@@ -21,8 +19,8 @@ scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-SVRmodel = SVR(kernel='rbf', C=10, epsilon=0.5, gamma='scale')
-SVRmodel.fit(X_train, y_train)
-SVRModelScore = SVRmodel.score(X_test, y_test)
+SVRModel = SVR(kernel='rbf', C=10, epsilon=0.5, gamma='scale')
+SVRModel.fit(X_train, y_train)
+SVRModelScore = SVRModel.score(X_test, y_test)
 
-print(f"SVR Model Score: {SVRModelScore}")
+print(f"SVR Model Score: {SVRModelScore:0.4f}")

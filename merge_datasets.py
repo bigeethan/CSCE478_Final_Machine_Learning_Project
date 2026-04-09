@@ -25,8 +25,6 @@ merged_dataset = pd.merge(
     how='left'
 )
 
-# merged_dataset.to_csv('cab_rides_and_weather.csv', index=False) <-- unnecessary to generate - just keep is a dataframe
-
 cab_rides_and_weather = merged_dataset
 sample_cab_rides_and_weather = cab_rides_and_weather.sample(n=250000, random_state=42)
 data = sample_cab_rides_and_weather[['distance', 'temp', 'rain', 'wind', 'surge_multiplier', 'name', 'source', 'destination', 'price']].dropna()
