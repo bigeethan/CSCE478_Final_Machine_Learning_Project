@@ -22,7 +22,6 @@ DTRModelScore = DTRModel.score(X_test, y_test)
 
 print(f"DTR Model Score: {DTRModelScore:0.4f}")
 
-
 #Confidence Interval
 pred_test = DTRModel.predict(X_test)
 errors = np.abs(y_test.values - pred_test)
@@ -36,7 +35,6 @@ n = len(errors)
 z = 1.96
 ci_lower = mean_error - z * (std_error / np.sqrt(n))
 ci_upper = mean_error + z * (std_error/ np.sqrt(n))
-
 
 # print(f"SVR MAE: {mae:0.4f}")
 print(f"DTR Mean Error : {mean_error:0.4f}")
