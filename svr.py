@@ -2,6 +2,8 @@ import pandas as pd
 from sklearn.svm import SVR
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn import metrics
+import numpy as np
 
 cab_rides_and_weather = pd.read_csv('sample_cab_rides_and_weather.csv')
 
@@ -20,7 +22,26 @@ X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
 SVRModel = SVR(kernel='rbf', C=10, epsilon=0.5, gamma='scale')
-SVRModel.fit(X_train, y_train)
+SVRModel.fit(X_train, np.ravel(y_train))
 SVRModelScore = SVRModel.score(X_test, y_test)
-
 print(f"SVR Model Score: {SVRModelScore:0.4f}")
+
+#Confidence Interval
+pred_test = SVRModel.predict(X_test)
+errors = np.abs(y_test.values - pred_test)
+mean_error = np.mean(errors)
+mae = metrics.mean_absolute_error(y_test, pred_test)
+var_error = np.var(errors, ddof=1)
+std_error = np.std(errors, ddof=1)
+
+#MAE = 1.96 * variance / sqrt(number of samples)
+n = len(errors)
+z = 1.96
+ci_lower = mae - z * (std_error / np.sqrt(n))
+ci_upper = mae + z * (std_error/ np.sqrt(n))
+
+
+# print(f"SVR MAE: {mae:0.4f}")
+print(f"SVR Mean Error : {mean_error:0.4f}")
+print(f"VR Variance Error: {var_error:0.4f}")
+print(f"SVR 95% CI for MAE: [{ci_lower:0.4f},{ci_upper:0.4f}]")
